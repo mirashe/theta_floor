@@ -2,17 +2,35 @@ from ast import Tuple
 import math
 from decimal import Decimal, getcontext
 
+primes = set([2])
+primes_list = [2]
+max_prime = Decimal(2)
+
 def is_prime(number):
+    global max_prime
+
     if number < Decimal(2):
         return False
+    
+    if number < max_prime:
+        return number in primes
 
     sqrt_num = number.sqrt()
     sqrt_num = sqrt_num.to_integral_value()
+    if sqrt_num < max_prime:
+        for i in primes_list:
+            if i > sqrt_num:
+                break
+            if number % i == Decimal(0):
+                return False
+    else:
+        for i in range(2, int(Decimal(number).sqrt()) + 1):
+            if number % i == Decimal(0):
+                return False
 
-    for i in range(int(2), int(sqrt_num) + 1):
-        if number % i == Decimal(0):
-            return False
-
+    max_prime = number
+    primes.add(number)
+    primes_list.append(number)
     return True
 
 def next_prime(number):
