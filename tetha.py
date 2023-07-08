@@ -14,15 +14,41 @@ max_prime = DEC_2
 primes_set = {max_prime}
 primes_list = [max_prime]
 
+prime_check_window = DEC_1000
+prime_check_top = DEC_3
+prime_check_next_start = {DEC_2: 0}
+
+
+def is_prime_cached(number):
+    global prime_check_top
+
+    if number < prime_check_top:
+        if number in prime_check_next_start:
+            return True
+        return False
+
+    check_range = {}
+    check_current = prime_check_top
+    while check_current < prime_check_top + prime_check_window:
+        check_range[check_current] = 0
+        check_current += DEC_1
+
+    primes_to_check = list(prime_check_next_start.keys())
+
+    while len(primes_to_check) > 0:
+        current_prime = primes_to_check.pop(0)
+
+
 def decimal_floor(number):
     return number - number % 1
+
 
 def is_prime(number):
     global max_prime
 
     if number < DEC_2:
         return False
-    
+
     if number <= max_prime:
         return number in primes_set
 
@@ -65,6 +91,7 @@ def next_prime(number):
             return next_num
         next_num += DEC_1
 
+
 def check_tetha(tetha):
     n = DEC_1
     while True:
@@ -75,6 +102,7 @@ def check_tetha(tetha):
             print(f"check_tetha: check failed at {n}")
             return n
         n += DEC_1
+
 
 tetha = (DEC_2, DEC_1)
 
@@ -88,8 +116,10 @@ while True:
     tetha = (next_prime_number, failed_n)
     print(f"tetha: {tetha} -> {tetha[0] ** (DEC_1 / tetha[1]):,}")
 
+
 def check_num(num):
     print(f"{num:,} is {is_prime(Decimal(num)):,}")
+
 
 def test_is_prime():
     check_num(2)
@@ -101,5 +131,5 @@ def test_is_prime():
     check_num(19)
     check_num(6)
     check_num(25)
-    check_num(73*73)
+    check_num(73 * 73)
     check_num(1)
