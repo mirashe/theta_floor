@@ -13,12 +13,13 @@ DEC_1000 = Decimal(1000)
 max_prime = DEC_2
 primes_set = {max_prime}
 primes_list = [max_prime]
+max_distance = DEC_1 # Maximum observed distance between two consecutive prime numbers
 
 def decimal_floor(number):
     return number - number % 1
 
 def is_prime(number):
-    global max_prime
+    global max_prime, max_distance
 
     if number < DEC_2:
         return False
@@ -46,6 +47,9 @@ def is_prime(number):
         if i > sqrt_num:
             return True
         if is_prime(i):
+            if i - max_prime > max_distance:
+                max_distance = i - max_prime
+
             max_prime = i
             primes_set.add(i)
             primes_list.append(i)
@@ -83,6 +87,9 @@ while True:
     last_generated_number = decimal_floor(tetha[0] ** (failed_n / tetha[1]))
     print(f"last_generated_number: {last_generated_number:,}")
     print(f"max prime: {max_prime:,}")
+    print(f"max distance: {max_distance:,}")
+    print(f"primes count: {len(primes_list):,}")
+
     next_prime_number = next_prime(last_generated_number)
     print(f"next_prime_number: {next_prime_number:,}")
     tetha = (next_prime_number, failed_n)
