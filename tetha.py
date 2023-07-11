@@ -22,9 +22,17 @@ def read_decimals_from_file():
 
     return decimal_list
 
+write_buffer = []
 def write_to_file(value):
+    global write_buffer
+    write_buffer.append(value)
+    if len(write_buffer) < 10000:
+        return
+
     with open(prime_numbers_file_path, 'a') as f:
-        f.write(str(value) + '\n')
+        for num in write_buffer:
+            f.write(str(num) + '\n')
+    write_buffer = []
 
 def decimal_floor(number):
     return number - number % 1
