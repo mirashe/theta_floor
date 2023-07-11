@@ -103,8 +103,10 @@ primes_list = read_decimals_from_file()
 if len(primes_list) == 0:
     primes_list = [DEC_2]
     write_to_file(DEC_2)
+    max_distance = DEC_0  # Maximum observed distance between two consecutive prime numbers
+else:
+    max_distance = max([x - y for x, y in zip(primes_list[1:], primes_list[:-1])])
 
-max_distance = DEC_1  # Maximum observed distance between two consecutive prime numbers
 max_prime = primes_list[-1]
 primes_set = set(primes_list)
 
