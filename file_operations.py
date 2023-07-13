@@ -10,19 +10,23 @@ def read_decimals_from_file():
     decimal_list = []
     with open(__prime_numbers_file_path, 'r') as f:
         for line in f:
-            decimal_list.append(Decimal(line.strip()))
+            new_number = Decimal(line.strip())
+            if len(decimal_list) > 0 and new_number <= decimal_list[-1]:  # validate the numbers
+                raise Exception(f'Error! Unexpected values found in the given file!: '
+                                f'{decimal_list[-1]}, {new_number}')
+            decimal_list.append(new_number)
 
     return decimal_list
 
-write_buffer = []
+__write_buffer = []
 def write_to_file(value):
-    global write_buffer
-    write_buffer.append(value)
-    if len(write_buffer) < 10000:
+    global __write_buffer
+    __write_buffer.append(value)
+    if len(__write_buffer) < 10000:
         return
 
     with open(__prime_numbers_file_path, 'a') as f:
-        for num in write_buffer:
+        for num in __write_buffer:
             f.write(str(num) + '\n')
-    write_buffer = []
+    __write_buffer = []
 
