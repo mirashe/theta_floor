@@ -10,7 +10,7 @@ __DEC_4 = Decimal(4)
 primes_list = file_operations.read_decimals_from_file()
 if len(primes_list) == 0:
     primes_list = [__DEC_2]
-    write_to_file(__DEC_2)
+    file_operations.write_to_file(__DEC_2)
     max_distance = __DEC_0  # Maximum observed distance between two consecutive prime numbers
 else:
     max_distance = max([x - y for x, y in zip(primes_list[1:], primes_list[:-1])])

@@ -1,6 +1,7 @@
 import prime_operations
 from decimal import Decimal
 
+__DEC_0 = Decimal(0)
 __DEC_1 = Decimal(1)
 __DEC_2 = Decimal(2)
 
@@ -15,7 +16,20 @@ def __check_tetha(tetha):
             return (last_generated_number, n)
         n += __DEC_1
 
+def validate_power_accuracy(tetha, power):
+    calculated_tetha = tetha[0] ** (__DEC_1 / tetha[1])
+    if power % tetha[1] == __DEC_0:
+        power += 1
+    critical_number = __decimal_floor(calculated_tetha ** power)
+    if power % tetha[1] != __DEC_0 and __decimal_floor(calculated_tetha.next_minus() ** power) < critical_number:
+        raise Exception(f'Error! Decimal precision is not enough anymore!: '
+                        f'{calculated_tetha} ** {power} ~= {__decimal_floor}')
+    if __decimal_floor(calculated_tetha.next_plus() ** power) > critical_number:
+        raise Exception(f'Error! Decimal precision is not enough anymore!: '
+                        f'{calculated_tetha} ** {power} ~= {critical_number}')
+
 def find_tetha():
+    biggest_power = 0
     tetha = (__DEC_2, __DEC_1)
     check_index = 0
     while True:
@@ -24,12 +38,16 @@ def find_tetha():
         print(f"check index: {check_index:,}")
         print(f"next_prime_number: {tetha[0]:,}")
         print(f"tetha: {tetha} -> {tetha[0] ** (__DEC_1 / tetha[1]):,}")
-        print(f"check failed at {failed_n}")
+        print(f"check failed at: {failed_n}")
         print(f"last_generated_number: {last_generated_number:,}")
         print(f"max prime: {prime_operations.max_prime:,}")
         print(f"max distance: {prime_operations.max_distance:,}")
         print(f"primes count: {len(prime_operations.primes_list):,}")
         print("----------------------------------------------------")
+
+        if failed_n > biggest_power:
+            biggest_power = failed_n
+        validate_power_accuracy(tetha, biggest_power)
 
         next_prime_number = prime_operations.next_prime(last_generated_number)
         tetha = (next_prime_number, failed_n)
