@@ -1,4 +1,5 @@
 import prime_operations
+from decimal import Decimal
 
 def __check_num(num):
     print(f"{num:,} is {prime_operations.is_prime(Decimal(num)):,}")

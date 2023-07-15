@@ -8,12 +8,15 @@ __DEC_3 = Decimal(3)
 __DEC_4 = Decimal(4)
 
 primes_list = file_operations.read_decimals_from_file()
+
 if len(primes_list) == 0:
     primes_list = [__DEC_2]
     file_operations.write_to_file(__DEC_2)
     max_distance = __DEC_0  # Maximum observed distance between two consecutive prime numbers
 else:
+    print('Calculating the maximum distance between consecutive primes until now...')
     max_distance = max([x - y for x, y in zip(primes_list[1:], primes_list[:-1])])
+    print('Calculating the maximum distance between consecutive primes until now completed!')
 
 max_prime = primes_list[-1]
 __primes_set = set(primes_list)
@@ -57,7 +60,7 @@ def is_prime(number):
 
             if number % i == __DEC_0:
                 return False
-        i += 2
+        i += __DEC_2
 
 
 def next_prime(number):

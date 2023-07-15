@@ -7,6 +7,8 @@ def read_decimals_from_file():
     if not os.path.isfile(__prime_numbers_file_path):
         return []
 
+    print('Reading the pre-stored primes file...')
+
     decimal_list = []
     with open(__prime_numbers_file_path, 'r') as f:
         for line in f:
@@ -16,6 +18,7 @@ def read_decimals_from_file():
                                 f'{decimal_list[-1]}, {new_number}')
             decimal_list.append(new_number)
 
+    print('Reading the pre-stored primes file completed!')
     return decimal_list
 
 __write_buffer = []
