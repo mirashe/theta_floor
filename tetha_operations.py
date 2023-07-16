@@ -12,7 +12,7 @@ def __check_tetha(tetha):
     n = __DEC_1
     while True:
         last_generated_number = __decimal_floor(tetha[0] ** (n / tetha[1]))
-        if not prime_operations.is_prime(last_generated_number):
+        if not prime_operations.is_prime(int(last_generated_number)):
             return (last_generated_number, n)
         n += __DEC_1
 
@@ -51,6 +51,6 @@ def find_tetha():
 
         __validate_power_accuracy(tetha, biggest_power)
 
-        next_prime_number = prime_operations.next_prime(last_generated_number)
+        next_prime_number = Decimal(prime_operations.next_prime(int(last_generated_number)))
         tetha = (next_prime_number, failed_n)
         check_index += 1

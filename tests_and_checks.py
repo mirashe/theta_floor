@@ -1,8 +1,7 @@
 import prime_operations
-from decimal import Decimal
 
 def __check_num(num):
-    print(f"{num:,} is {prime_operations.is_prime(Decimal(num)):,}")
+    print(f"{num:,} is {prime_operations.is_prime(num)}")
 
 def test_is_prime():
     prime_operations.initialize()
@@ -15,5 +14,5 @@ def test_is_prime():
     __check_num(19)
     __check_num(6)
     __check_num(25)
-    __check_num(73*73)
+    __check_num(73 * 73)
     __check_num(1)
