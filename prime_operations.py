@@ -1,5 +1,4 @@
 import math
-
 import file_operations
 
 primes_list = file_operations.read_integers_from_file()
