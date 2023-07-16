@@ -15,10 +15,13 @@ if len(primes_list) == 0:
 
 print('Calculating the maximum distance between consecutive primes until now...')
 max_distance = max([x - y for x, y in zip(primes_list[1:], primes_list[:-1])])
-print('Calculating the maximum distance between consecutive primes until now completed!')
+print('Finished!')
 
 max_prime = primes_list[-1]
+
+print('Making the prime numbers set using the list...')
 __primes_set = set(primes_list)
+print('Finished!')
 
 def is_prime(number):
     global max_prime, max_distance

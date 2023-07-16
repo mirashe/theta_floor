@@ -18,7 +18,7 @@ def read_decimals_from_file():
                                 f'{decimal_list[-1]}, {new_number}')
             decimal_list.append(new_number)
 
-    print('Reading the pre-stored primes file completed!')
+    print('Finished!')
     return decimal_list
 
 __write_buffer = []

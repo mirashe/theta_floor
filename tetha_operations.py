@@ -38,14 +38,15 @@ def find_tetha():
         if failed_n > biggest_power:
             biggest_power = failed_n
 
-        print(f"check index: {check_index:,}")
-        print(f"tetha: {tetha[0]:,} ^ 1/{tetha[1]} -> {tetha[0] ** (__DEC_1 / tetha[1]):,}")
-        print(f"check failed at: {failed_n}")
-        print(f"biggest observed power: {biggest_power}")
-        print(f"last_generated_number: {last_generated_number:,}")
-        print(f"max prime: {prime_operations.max_prime:,}")
-        print(f"max distance: {prime_operations.max_distance:,}")
-        print(f"primes count: {len(prime_operations.primes_list):,}")
+        print(f"Check index: {check_index:,}")
+        print(f"Tetha form: {tetha[0]:,} ^ 1/{tetha[1]}")
+        print(f"Tetha value: {tetha[0] ** (__DEC_1 / tetha[1]):,}")
+        print(f"Theck failed at: {failed_n}")
+        print(f"Biggest observed power: {biggest_power}")
+        print(f"Last generated number: {last_generated_number:,}")
+        print(f"Max prime: {prime_operations.max_prime:,}")
+        print(f"Max distance: {prime_operations.max_distance:,}")
+        print(f"Primes count: {len(prime_operations.primes_list):,}")
         print("----------------------------------------------------")
 
         __validate_power_accuracy(tetha, biggest_power)
